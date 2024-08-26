@@ -17,11 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("centered w-full flex-col", inter.className)}>
-        <div className="centered h-dvh max-h-dvh w-full max-w-[425px] flex-col rounded-lg border-2">
+    <html lang="en" className="centered h-full">
+      <body
+        className={cn(
+          "centered h-dvh max-h-dvh w-full max-w-4xl flex-col",
+          inter.className,
+        )}
+      >
+        <main className="centered h-full w-full flex-1 flex-col py-5">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );

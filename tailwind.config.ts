@@ -4,11 +4,11 @@ import plugin from "tailwindcss/plugin";
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -91,18 +91,23 @@ const config = {
         inside: "-3px -3px 2px rgba(0, 0, 0, 0.5)",
         diary: "4px 4px 3px rgba(0, 0, 0, 0.5)",
       },
+      gridTemplateColumns: {
+        fret: "0.5fr repeat(12, minmax(0, 1fr))",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"),
-  plugin(function ({ addComponents }) {
-    addComponents({
-      ".centered": {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-    });
-  }),],
-} satisfies Config
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".centered": {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        },
+      });
+    }),
+  ],
+} satisfies Config;
 
-export default config
+export default config;
