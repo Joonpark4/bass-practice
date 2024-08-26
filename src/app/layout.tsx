@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Footer } from "@/components/layout/footer";
+import { WarningModalComponent } from "@/components/layout/modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,16 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="centered h-full">
+    <html lang="en" className="centered h-full w-full">
       <body
         className={cn(
-          "centered h-dvh max-h-dvh w-full max-w-4xl flex-col",
+          "centered relative h-dvh max-h-dvh w-full flex-col sm:max-w-4xl",
           inter.className,
         )}
       >
-        <main className="centered h-full w-full flex-1 flex-col py-5">
+        <main className="flex h-full w-full flex-1 flex-col items-center justify-start py-5 sm:justify-center">
           {children}
         </main>
+        <WarningModalComponent />
       </body>
     </html>
   );

@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef } from "react";
 import { FretBoardComponent } from "@/components/ui/FretBoard";
 import { cn } from "@/lib/utils";
+import { VerticalFretBoardComponent } from "@/components/ui/VerticalFretboard";
+import useModalStore from "@/store/modal";
 
 export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,6 +13,7 @@ export default function Home() {
   const [playText, setPlayText] = useState("Play ▶️");
   const [isCorrectColor, setIsCorrectColor] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const { open } = useModalStore();
 
   const easyNote = ["A", "B", "C", "D", "E", "F", "G"];
   const hardNote = [
@@ -163,9 +166,9 @@ export default function Home() {
 
   return (
     <div className="centered w-full flex-col gap-3">
-      <div className="flex w-full justify-start gap-3">
-        <div className="flex min-w-[210px] flex-col gap-2 p-2">
-          <p className="mb-2 text-center text-lg font-semibold">
+      <div className="flex w-full flex-wrap justify-center gap-3 sm:flex-row">
+        <div className="flex min-w-[100px] max-w-[210px] flex-col gap-2 p-2">
+          <p className="mb-2 hidden text-center text-lg font-semibold sm:block">
             주어진 코드를 찾아봐요
           </p>
           <div className="flex w-full justify-between gap-2">
@@ -188,7 +191,7 @@ export default function Home() {
                   if (!isPlaying) setMode("hard");
                 }}
               >
-                어려움
+                보통
               </button>
               <button
                 className={`w-full cursor-pointer rounded-md p-1 text-base text-white ${
@@ -198,8 +201,6 @@ export default function Home() {
                   if (!isPlaying) setMode("veryHard");
                 }}
               >
-                매우
-                <br />
                 어려움
               </button>
             </div>
@@ -211,27 +212,30 @@ export default function Home() {
             >
               {playText}
             </button>
-            <button className="w-full cursor-pointer rounded-md bg-yellow-600 p-1 text-xl text-white">
+            <button
+              className="w-full cursor-pointer rounded-md bg-yellow-600 p-1 text-xl text-white"
+              onClick={open}
+            >
               Warning
             </button>
           </div>
         </div>
-        <div className="centered w-full min-w-[240px] max-w-72 flex-col">
+        <div className="centered w-full min-w-[217px] max-w-72 flex-col self-center">
           <div className="flex w-full max-w-72 gap-5 p-3">
             <div className="centered relative aspect-square h-full w-full overflow-visible border-2 border-black">
-              <div className=" absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-xl">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-lg">
                 문제
               </div>
               <span className="text-5xl">{questionNote}</span>
             </div>
             <div className="centered relative aspect-square h-full w-full overflow-visible border-2 border-black">
-              <div className=" absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-xl">
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-lg">
                 답
               </div>
               {isVisible && (
                 <div
                   className={cn(
-                    " absolute left-0 top-0 h-full w-full bg-opacity-60",
+                    "absolute left-0 top-0 h-full w-full bg-opacity-60",
                     isCorrectColor,
                   )}
                 ></div>
@@ -241,8 +245,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      <FretBoardComponent onClick={handleAnswerClick} />
+      <div className="hidden w-full sm:block">
+        <FretBoardComponent onClick={handleAnswerClick} />
+      </div>
+      <div className="centered w-full sm:hidden">
+        <VerticalFretBoardComponent onClick={handleAnswerClick} />
+      </div>
     </div>
   );
 }

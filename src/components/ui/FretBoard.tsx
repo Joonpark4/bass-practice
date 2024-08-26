@@ -17,13 +17,13 @@ export const FretBoardComponent = ({
   const handleFretClick = (frequency: number, code: string) => {
     console.log(`Fret code: ${code}`);
     onClick(code);
-    const audioContext = new (window.AudioContext || window.AudioContext)();
-    const oscillator = audioContext.createOscillator();
-    oscillator.type = "sine";
-    oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-    oscillator.connect(audioContext.destination);
-    oscillator.start();
-    setTimeout(() => oscillator.stop(), 500); // 0.5초 동안 재생
+    // const audioContext = new (window.AudioContext || window.AudioContext)();
+    // const oscillator = audioContext.createOscillator();
+    // oscillator.type = "sine";
+    // oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+    // oscillator.connect(audioContext.destination);
+    // oscillator.start();
+    // setTimeout(() => oscillator.stop(), 500); // 0.5초 동안 재생
   };
 
   // 각 줄과 프렛에 대한 주파수 계산
@@ -33,7 +33,7 @@ export const FretBoardComponent = ({
 
   return (
     <>
-      <div className=" grid-cols-fret relative grid w-full border-4 border-black">
+      <div className="relative grid w-full grid-cols-fret border-4 border-black">
         {Object.keys(fretCodes).map((string) =>
           fretCodes[string as keyof typeof fretCodes].map((code, index) => {
             const baseFreq =
@@ -50,7 +50,7 @@ export const FretBoardComponent = ({
             );
           }),
         )}
-        <div className="grid-cols-fret absolute top-1/2 col-span-full m-0 grid w-full -translate-y-[55%] p-0">
+        <div className="pointer-events-none absolute top-1/2 col-span-full m-0 grid w-full -translate-y-[55%] grid-cols-fret p-0">
           {Array.from({ length: 13 }).map((_, index) => (
             <div
               key={index}
@@ -65,7 +65,7 @@ export const FretBoardComponent = ({
           ))}
         </div>
       </div>
-      <div className="grid-cols-fret grid w-full border-4 border-white">
+      <div className="grid w-full grid-cols-fret border-4 border-white">
         {Array.from({ length: 13 }).map((_, index) => (
           <div key={index} className="flex items-center justify-center">
             {index === 3 || index === 5 || index === 7 || index === 9
@@ -89,34 +89,34 @@ interface FretCodes {
 
 export const fretCodes: FretCodes = {
   G: [
-    "G2",
-    "G#2",
-    "A2",
-    "A#2",
-    "B2",
-    "C2",
-    "C#2",
-    "D2",
-    "D#2",
-    "E2",
-    "F2",
-    "F#2",
+    "G3",
+    "G#3",
+    "A4",
+    "A#4",
+    "B4",
+    "C4",
+    "C#4",
+    "D4",
+    "D#4",
+    "E4",
+    "F4",
+    "F#4",
     "G4",
   ],
   D: [
-    "D2",
-    "D#2",
-    "E2",
-    "F2",
-    "F#2",
-    "G2",
-    "G#2",
-    "A2",
-    "A#2",
-    "B2",
-    "C2",
-    "C#2",
-    "D2",
+    "D3",
+    "D#3",
+    "E3",
+    "F3",
+    "F#3",
+    "G3",
+    "G#3",
+    "A4",
+    "A#4",
+    "B4",
+    "C4",
+    "C#4",
+    "D4",
   ],
   A: [
     "A2",
@@ -131,7 +131,7 @@ export const fretCodes: FretCodes = {
     "F#2",
     "G2",
     "G#2",
-    "A2",
+    "A3",
   ],
   E: [
     "E1",
