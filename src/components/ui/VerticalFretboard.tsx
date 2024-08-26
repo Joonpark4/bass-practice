@@ -27,20 +27,6 @@ export const VerticalFretBoardComponent = ({
 
   return (
     <>
-      <div className="flex h-full flex-col justify-center border-4 border-white">
-        {Array.from({ length: 13 }).map((_, index) => (
-          <div
-            key={index}
-            className="flex h-[40px] items-center justify-center"
-          >
-            {index === 3 || index === 5 || index === 7 || index === 9
-              ? "●"
-              : index === 12
-                ? "●●"
-                : ""}
-          </div>
-        ))}
-      </div>
       <div className="relative flex w-full max-w-48 flex-row-reverse self-center border-4 border-black">
         {Object.keys(fretCodes).map((string) => (
           <div key={string} className="flex w-full max-w-12 flex-col">

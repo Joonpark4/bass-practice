@@ -24,7 +24,7 @@ export default function RootLayout({
           inter.className,
         )}
       >
-        <main className="flex h-full w-full flex-1 flex-col items-center justify-start py-5 sm:justify-center">
+        <main className="flex h-full w-full flex-1 flex-col items-center justify-start py-2 sm:justify-center sm:py-5">
           {children}
         </main>
         <WarningModalComponent />

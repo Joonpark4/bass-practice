@@ -10,7 +10,7 @@ export default function Home() {
   const [mode, setMode] = useState("easy");
   const [questionNote, setQuestionNote] = useState("");
   const [answerNote, setAnswerNote] = useState("");
-  const [playText, setPlayText] = useState("Play ▶️");
+  const [playText, setPlayText] = useState("Play");
   const [isCorrectColor, setIsCorrectColor] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const { open } = useModalStore();
@@ -116,12 +116,12 @@ export default function Home() {
   const handlePlay = () => {
     if (isPlaying) {
       setIsPlaying(false);
-      setPlayText("Play ▶️");
+      setPlayText("Play");
       setQuestionNote("");
       setAnswerNote("");
     } else {
       setIsPlaying(true);
-      setPlayText("Stop ⏹️");
+      setPlayText("Stop");
     }
   };
 
@@ -166,7 +166,7 @@ export default function Home() {
 
   return (
     <div className="centered w-full flex-col gap-3">
-      <div className="flex w-full flex-wrap justify-center gap-3 sm:flex-row">
+      <div className="flex w-full flex-row flex-wrap justify-center sm:gap-3">
         <div className="flex min-w-[100px] max-w-[210px] flex-col gap-2 p-2">
           <p className="mb-2 hidden text-center text-lg font-semibold sm:block">
             주어진 코드를 찾아봐요
@@ -207,30 +207,37 @@ export default function Home() {
           </div>
           <div className="flex w-full justify-between gap-2">
             <button
-              className="w-full cursor-pointer rounded-md bg-green-400 p-1 text-2xl text-white"
+              className={cn(
+                "w-full cursor-pointer rounded-md p-1 text-white sm:text-2xl",
+                isPlaying ? "bg-red-400" : "bg-green-400",
+              )}
               onClick={handlePlay}
             >
               {playText}
             </button>
             <button
-              className="w-full cursor-pointer rounded-md bg-yellow-600 p-1 text-xl text-white"
+              className="w-full cursor-pointer rounded-md bg-yellow-600 p-1 text-white sm:text-xl"
               onClick={open}
             >
               Warning
             </button>
           </div>
         </div>
-        <div className="centered w-full min-w-[217px] max-w-72 flex-col self-center">
+        <div className="centered w-full min-w-[150px] max-w-72 flex-col self-center sm:min-w-[217px]">
           <div className="flex w-full max-w-72 gap-5 p-3">
             <div className="centered relative aspect-square h-full w-full overflow-visible border-2 border-black">
               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-lg">
-                문제
+                <span className="hidden sm:block">문제</span>
+                <span className="block rotate-90 sm:hidden">Q</span>
               </div>
-              <span className="text-5xl">{questionNote}</span>
+              <span className="rotate-90 text-3xl sm:rotate-0 sm:text-5xl">
+                {questionNote}
+              </span>
             </div>
             <div className="centered relative aspect-square h-full w-full overflow-visible border-2 border-black">
               <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-lg">
-                답
+                <span className="hidden sm:block">답</span>
+                <span className="block rotate-90 sm:hidden">A</span>
               </div>
               {isVisible && (
                 <div
@@ -240,7 +247,9 @@ export default function Home() {
                   )}
                 ></div>
               )}
-              <span className="text-5xl">{answerNote}</span>
+              <span className="rotate-90 text-3xl sm:rotate-0 sm:text-5xl">
+                {answerNote}
+              </span>
             </div>
           </div>
         </div>
