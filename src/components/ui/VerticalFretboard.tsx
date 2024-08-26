@@ -60,7 +60,7 @@ export const VerticalFretBoardComponent = ({
             })}
           </div>
         ))}
-        <div className="absolute left-1/2 top-0 flex h-full flex-col justify-center">
+        <div className="pointer-events-none absolute left-1/2 top-0 flex h-full flex-col justify-center">
           {Array.from({ length: 13 }).map((_, index) => (
             <div
               key={index}
