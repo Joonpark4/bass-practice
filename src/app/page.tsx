@@ -9,7 +9,8 @@ export default function Home() {
   const [questionNote, setQuestionNote] = useState("");
   const [answerNote, setAnswerNote] = useState("");
   const [playText, setPlayText] = useState("Play ▶️");
-  const [isCorrectColor, setIsCorrectColor] = useState("bg-green-400");
+  const [isCorrectColor, setIsCorrectColor] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
   const easyNote = ["A", "B", "C", "D", "E", "F", "G"];
   const hardNote = [
@@ -124,30 +125,40 @@ export default function Home() {
   const handleAnswerClick = (code: string) => {
     if (mode === "easy") {
       // 이지모드 일때는 code값의 맨 첫 글자 하나만 비교
-      if (easyNote.includes(code[0])) {
+      if (questionNote === code[0]) {
         setAnswerNote(code[0]);
         setIsCorrectColor("bg-green-400");
       } else {
         setAnswerNote(code[0]);
+        setIsCorrectColor("bg-red-400");
       }
     }
     if (mode === "hard") {
       // 하드모드 일때는 맨 뒤에 숫자가 있을 때 숫자만 없애고 비교
-      if (hardNote.includes(code.replace(/[0-9]/g, ""))) {
+      if (questionNote === code.replace(/[0-9]/g, "")) {
         setAnswerNote(code.replace(/[0-9]/g, ""));
         setIsCorrectColor("bg-green-400");
       } else {
         setAnswerNote(code.replace(/[0-9]/g, ""));
+        setIsCorrectColor("bg-red-400");
       }
     }
     if (mode === "veryHard") {
       // 매우 어려운 모드일때는 code값을 정확하게 비교
-      if (veryHardNote.includes(code)) {
+      if (questionNote === code) {
         setAnswerNote(code);
+        setIsCorrectColor("bg-green-400");
       } else {
         setAnswerNote(code);
+        setIsCorrectColor("bg-red-400");
       }
     }
+
+    // 컴포넌트가 깜빡이도록 설정
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 500); // 0.5초 후에 컴포넌트를 숨김
   };
 
   return (
@@ -217,12 +228,14 @@ export default function Home() {
               <div className=" absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[55%] rounded-lg bg-white p-1 text-xl">
                 답
               </div>
-              <div
-                className={cn(
-                  " absolute left-0 top-0 h-full w-full bg-opacity-60",
-                  isCorrectColor,
-                )}
-              ></div>
+              {isVisible && (
+                <div
+                  className={cn(
+                    " absolute left-0 top-0 h-full w-full bg-opacity-60",
+                    isCorrectColor,
+                  )}
+                ></div>
+              )}
               <span className="text-5xl">{answerNote}</span>
             </div>
           </div>
