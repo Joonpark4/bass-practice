@@ -1,6 +1,6 @@
 {
-  "name": "nextapp-template",
-  "version": "0.1.0",
+  "name": "bass-practice",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "proxy": "next dev -H 192.168.219.169",

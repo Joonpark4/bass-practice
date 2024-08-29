@@ -230,7 +230,7 @@ export default function Home() {
                 <span className="hidden sm:block">문제</span>
                 <span className="block rotate-90 sm:hidden">Q</span>
               </div>
-              <span className="rotate-90 text-3xl sm:rotate-0 sm:text-5xl">
+              <span className="rotate-90 text-3xl sm:rotacte-0 sm:text-5xl">
                 {questionNote}
               </span>
             </div>
