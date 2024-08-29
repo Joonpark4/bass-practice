@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { WarningModalComponent } from "@/components/layout/modal";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
         </main>
         <WarningModalComponent />
+        <Analytics />
       </body>
     </html>
   );
