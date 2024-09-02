@@ -128,31 +128,28 @@ export default function Home() {
   const handleAnswerClick = (code: string) => {
     if (mode === "easy") {
       // 이지모드 일때는 code값의 맨 첫 글자 하나만 비교
+      setAnswerNote(code);
       if (questionNote === code[0]) {
-        setAnswerNote(code[0]);
         setIsCorrectColor("bg-green-400");
       } else {
-        setAnswerNote(code[0]);
         setIsCorrectColor("bg-red-400");
       }
     }
     if (mode === "hard") {
       // 하드모드 일때는 맨 뒤에 숫자가 있을 때 숫자만 없애고 비교
+      setAnswerNote(code);
       if (questionNote === code.replace(/[0-9]/g, "")) {
-        setAnswerNote(code.replace(/[0-9]/g, ""));
         setIsCorrectColor("bg-green-400");
       } else {
-        setAnswerNote(code.replace(/[0-9]/g, ""));
         setIsCorrectColor("bg-red-400");
       }
     }
     if (mode === "veryHard") {
+      setAnswerNote(code);
       // 매우 어려운 모드일때는 code값을 정확하게 비교
       if (questionNote === code) {
-        setAnswerNote(code);
         setIsCorrectColor("bg-green-400");
       } else {
-        setAnswerNote(code);
         setIsCorrectColor("bg-red-400");
       }
     }
@@ -230,7 +227,7 @@ export default function Home() {
                 <span className="hidden sm:block">문제</span>
                 <span className="block rotate-90 sm:hidden">Q</span>
               </div>
-              <span className="rotate-90 text-3xl sm:rotacte-0 sm:text-5xl">
+              <span className="sm:rotacte-0 rotate-90 text-3xl sm:text-5xl">
                 {questionNote}
               </span>
             </div>
